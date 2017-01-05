@@ -157,7 +157,7 @@ public class clsGestor
 		
 		for(clsPausa x:lista)
 		{
-			guardarPausado(x.getnLocal(),x.getnVisi(),x.getPosXBola(),x.getPosYBola(),x.getpL(),x.getpL(),x.getPosYraqL(),x.getPosYraqV(),x.getFechaHora());
+			guardarPausado(x.getnLocal(),x.getnVisi(),x.getPosXBola(),x.getPosYBola(),x.getpL(),x.getpV(),x.getPosYraqL(),x.getPosYraqV(),x.getFechaHora());
 			
 		}
 	}

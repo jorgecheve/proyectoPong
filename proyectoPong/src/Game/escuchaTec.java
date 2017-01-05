@@ -8,7 +8,7 @@ public class escuchaTec implements KeyListener
 	//s y x son teclas de subir y bajar del local, y k y m son del visitante
 	static boolean s,x,k,m;
 	
-	static boolean space=false; //Para parar el hilo
+	static boolean space=false; //Pausar la partida
 
 	@Override
 	public void keyPressed(KeyEvent e) {

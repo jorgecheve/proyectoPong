@@ -10,6 +10,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -30,39 +31,16 @@ public class clsSelPausada extends JFrame implements ListSelectionListener{
 	private ArrayList <clsPausa> lista;
 	
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					clsSelPausada frame = new clsSelPausada();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public clsSelPausada() {
+	public clsSelPausada() throws noFicheroException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 450);
 		this.getContentPane().setLayout(null);		
 		modelo1=new DefaultListModel<clsPausa>();
 		lista=new ArrayList<clsPausa>();
 		
-		try {
-			lista=clsGestor.obtenerFichPausa();
-		} catch (noFicheroException e) {
-			// TODO Auto-generated catch block
-			JOptionPane.showMessageDialog(null, "No hay partidas guardadas");
-			this.dispose();
-		}
+		
+		lista=clsGestor.obtenerFichPausa();
+		
 		Componentes();
 		
 		jListaPartidas.addListSelectionListener(this);
@@ -80,6 +58,8 @@ public class clsSelPausada extends JFrame implements ListSelectionListener{
 		jListaPartidas.setBounds(30, 58, 375, 280);
 		getContentPane().add(jListaPartidas);
 		
+		
+		
 		JButton btnJugar = new JButton("JUGAR!");
 		btnJugar.setBounds(93, 349, 109, 23);
 		getContentPane().add(btnJugar);
@@ -88,9 +68,19 @@ public class clsSelPausada extends JFrame implements ListSelectionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub	
+				
 				if(jListaPartidas.isSelectionEmpty()==false)
 				{
-					VentJuego v=new VentJuego(jListaPartidas.getSelectedValue().getnLocal(),jListaPartidas.getSelectedValue().getnVisi(),true,jListaPartidas.getSelectedValue());
+					int indice=0;
+					for(int i=0;i<lista.size();i++)
+					{
+						if(jListaPartidas.getSelectedValue().getFechaHora()==lista.get(i).getFechaHora())
+						{
+							indice=i;
+						}
+					}
+					
+					VentJuego v=new VentJuego(lista.get(indice).getnLocal(),lista.get(indice).getnVisi(),true,lista.get(indice));
 					clsGestor.elimPausadas(jListaPartidas.getSelectedIndex(),lista);
 					dispose();
 				}					

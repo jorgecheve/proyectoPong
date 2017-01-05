@@ -197,7 +197,8 @@ public class panelJuego extends JPanel
 	{
 		if(escuchaTec.space==true)
 		{
-			clsGestor.guardarPausado(nickL, nickV,marcLoc,marcVis, bola.getX(), bola.getY(),local.getY(),visitante.getY(),null);
+			clsGestor.guardarPausado(nickL, nickV,bola.getX(), bola.getY(),marcLoc,marcVis, local.getY(),visitante.getY(),null);
+			escuchaTec.space=false;
 			v.dispose();
 		}
 	}

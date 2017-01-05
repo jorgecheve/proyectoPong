@@ -19,7 +19,7 @@ public class hiloPartida extends Thread
 		 {
 			 
 	            try {
-	                Thread.sleep(5);
+	                Thread.sleep(3);
 	             
 	            } catch (InterruptedException ex) {
 	              

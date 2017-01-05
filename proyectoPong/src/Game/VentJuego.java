@@ -30,7 +30,7 @@ public class VentJuego extends JFrame
 		pPrincipal=new panelJuego(local, visi,this);
 		add(pPrincipal);
 		
-		if(pausada==true)
+		if(pausada==true)	//Si la partida estaba pausada le damos estos valores a los atributos
 		{
 			pPrincipal.estabaPausada(p.getPosXBola(), p.getPosYBola(), p.getPosYraqL(), p.getPosYraqV(), p.getpL(), p.getpV());
 		}

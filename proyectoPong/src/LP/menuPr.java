@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 
 
 import Game.VentJuego;
-import LD.clsInstrucciones;
+import LP.clsInstrucciones;
 import LN.clsGestor;
 import LN.noFicheroException;
 
@@ -83,7 +83,12 @@ public class menuPr extends JFrame {
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{ 
-				clsSelPausada v=new clsSelPausada();
+				try {
+					clsSelPausada v=new clsSelPausada();
+				} catch (noFicheroException e) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, e.getMensaje2());
+				}
 			}
 		});
 		

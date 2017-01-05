@@ -12,9 +12,8 @@ public class clsPausa implements Serializable
 	private int posYraqL; private int posYraqV;
 	private String fechaHora;
 
-	public clsPausa(String nLocal, String nVisi,int posXBola,
-			int posYBola, int pL, int pV,  int posYraqL, int posYraqV, String fechaHora) {
-		super();
+	public clsPausa(String nLocal, String nVisi,int posXBola,int posYBola, int pL, int pV,  int posYraqL, int posYraqV, String fechaHora) 
+	{
 		this.nLocal = nLocal;
 		this.nVisi = nVisi;
 		this.pL = pL;
@@ -138,7 +137,7 @@ public class clsPausa implements Serializable
 
 	@Override
 	public String toString() {
-		return nLocal +":"+pL+" - " + nVisi + ":" + pL+" a las "+ fechaHora;
+		return nLocal +": "+pL+" - " + nVisi + ": " + pV+" a las "+ fechaHora;
 	}
 	
 	

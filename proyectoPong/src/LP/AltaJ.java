@@ -52,7 +52,10 @@ public class AltaJ extends JFrame {
 			{
 				if(textField.getText().isEmpty()||textField_1.getText().isEmpty()||textField_2.getText().isEmpty())
 				{
-					JOptionPane.showMessageDialog(null, "Hay algún campo de texto vacío, rellénelo");
+					JOptionPane.showMessageDialog(null, "Hay algún campo de texto vacío, rellénelo");					
+				}else if(textField_2.getText().length()>10)
+				{
+					JOptionPane.showMessageDialog(null, "El número de caracteres del nickname no puede ser superior a 10");
 				}else
 				{
 					//Dar de alta a un jugador
