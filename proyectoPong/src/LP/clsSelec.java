@@ -23,42 +23,14 @@ import LN.noFicheroException;
 
 public class clsSelec extends JFrame {
 	
-	ArrayList<Jugador>listajug;
-	
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					clsSelec frame = new clsSelec();
-					frame.setVisible(true);
-				} catch (noFicheroException e) {
-					e.getMensaje();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 * @throws noFicheroException 
-	 */
 	public clsSelec() throws noFicheroException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);	
 		getContentPane().setLayout(null);
 		
-		listajug=new ArrayList<Jugador>();
-		listajug.addAll(LN.clsGestor.obtenerFichJugador());
 		
-		String[] nicks=new String[listajug.size()]; //Creo que aquí podría hacer una prueba unitaria, para comprobar que los nickname se han introducido bien en el array, y en sus posiciones correspondientes
-		for(Jugador x:listajug)
-		{
-			nicks[x.getId()-1]=x.getNickname();  //Los ID además de identificar a cada jugador son números sucesivos;por lo que los utilizo para indicar la posición en el array
-		}
+		String[] nicks=rellenarArrDeJugadores();
 		
 		JComboBox comboLocal = new JComboBox();
 		comboLocal.setModel(new DefaultComboBoxModel(nicks));
@@ -108,7 +80,17 @@ public class clsSelec extends JFrame {
 			{
 				dispose();
 			}
-		});
-		
+		});		
+	}
+	
+	public String[] rellenarArrDeJugadores() throws noFicheroException
+	{
+		ArrayList<Jugador> l=clsGestor.obtenerFichJugador();
+		String[] nicks=new String[l.size()]; 
+		for(Jugador x:l)
+		{
+			nicks[x.getId()-1]=x.getNickname();  
+		}
+		return nicks;
 	}
 }

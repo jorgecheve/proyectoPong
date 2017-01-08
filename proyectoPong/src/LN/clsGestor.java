@@ -4,14 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
-
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import LD.BaseDeDatos;
 import LD.clsConstantes.enficdatos;
 import LD.clsDatos;
-import LD.clsDatosTxt;
 import LP.TablaEstad;
 
 
@@ -101,8 +98,7 @@ public class clsGestor
 		BaseDeDatos.insertJuega(jloc, fecha+" "+hora, p1, "local");
 		BaseDeDatos.insertJuega(jvis, fecha+" "+hora, p2, "visitante");
 		//BaseDeDatos.selectJuega();
-		BaseDeDatos.close();
-			
+		BaseDeDatos.close();			
 	}
 	
 	public static void guardarPausado(String nL, String nV, int bolaX, int bolaY,int marcL,int marcV, int raqL, int raqV,String fechaHora)
@@ -162,12 +158,25 @@ public class clsGestor
 		}
 	}
 	
-	public static void estadPrueba()
+	public static void enfrentamientos()
 	{
 		TablaEstad t=new TablaEstad();
-		BaseDeDatos.selectJuega(t,"select nickname, fechahora from juega where goles=10;");
+		//BaseDeDatos.select(t,"SELECT DISTINCT nickname from juega where goles=10;"); //LISTADO DE TODOS LOS USUARIOS QUE HAN SIDO CAMPEONES
+		//BaseDeDatos.select(t,"SELECT NOMBRE, APELLIDO, NICKNAME FROM JUGADOR;"); 	//LISTADO DE TODOS LOS JUGADORES
+		BaseDeDatos.select(t, "select a.nickname,a.goles, b.nickname, b.goles, a.fechahora from juega a, juega b "
+				+ "where a.fechahora=b.fechahora and a.nickname<> b.nickname and a.papel='local' and b.papel='visitante';"); //TODOS LOS ENFRENTAMIENTOS Y SUS RESULTADOS
+		//BaseDeDatos.select(t, "select distinct j.nombre, j.apellido, j.nickname from jugador j, juega jg where j.nickname=jg.nickname and jg.goles=10 ;"); //Los diferentes campeones que ha habido
+		
 		t.pack();
 		t.setVisible(true);		
+	}
+	public static void campeones()
+	{
+		TablaEstad t=new TablaEstad();	
+		BaseDeDatos.select(t, "select distinct j.nombre, j.apellido, j.nickname from jugador j, juega jg where j.nickname=jg.nickname and jg.goles=10 ;"); //Los diferentes campeones que ha habido
+		
+		t.pack();
+		t.setVisible(true);	
 	}
 
 }

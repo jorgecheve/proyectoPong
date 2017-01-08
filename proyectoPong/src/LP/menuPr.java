@@ -116,7 +116,17 @@ public class menuPr extends JFrame {
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{ 
-				clsGestor.estadPrueba();
+				clsGestor.enfrentamientos();
+			}
+		});
+		
+		JMenuItem estad2=new JMenuItem ("Listado de los diferentes campeones");
+		estadi.add(estad2);
+		estad2.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{ 
+				clsGestor.campeones();
 			}
 		});
 		

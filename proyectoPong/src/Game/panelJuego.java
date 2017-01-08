@@ -43,7 +43,6 @@ public class panelJuego extends JPanel
 	
 	private JLabel mLo;
 	private JLabel mVi;
-	private JButton guardar;
 		
 	private JPanel marcadores;
 	private JFrame v;
@@ -70,32 +69,15 @@ public class panelJuego extends JPanel
 		
 		mLo= new JLabel(nickL+":"+"0");
 		mVi=new JLabel(nickV+":"+"0");
-		//guardar=new JButton("G");
 		
 		marcadores.add(mVi);
 		marcadores.add(mLo);
-		//marcadores.add(guardar);
-		
-		
-		
+				
 		mLo.setBounds(10, 10, 80, 20);
 		mVi.setBounds(110, 10, 80, 20);  
-		//guardar.setBounds(195, 10, 50, 20);
 		
 		v=ven;	//La ventana donde se encuentra este panel.
-		
-		
-		/*guardar.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent arg0) 
-			{ 
-				clsGestor.guardarPausado(nickL, nickV, bola.getX(), bola.getY());
-				v.dispose();
-			}
-		});*/
-		
-		
-			
+					
 	}
 	
 	@Override
@@ -183,13 +165,7 @@ public class panelJuego extends JPanel
 		{
 			
 			v.dispose();
-			clsGestor.partidaTerminada(nickL, nickV, marcLoc, marcVis);
-			//JOptionPane.showMessageDialog(null, "El resultado ha sido: LOCAL:"+String.valueOf(marcLoc)+" - VISITANTE:"+String.valueOf(marcVis));
-			/*marcVis=0;
-			marcLoc=0;
-			mLo.setText(nickL+":"+String.valueOf(marcLoc));
-			mVi.setText(nickV+":"+String.valueOf(marcVis));*/		
-			
+			clsGestor.partidaTerminada(nickL, nickV, marcLoc, marcVis);	
 		}
 	}
 	

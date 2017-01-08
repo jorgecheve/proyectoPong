@@ -14,17 +14,8 @@ import javax.swing.JPanel;
 
 import LP.TablaEstad;
 
-/** Métodos útiles para base de datos.
- * Clase con métodos estáticos para gestionar una sola base de datos
- * @author Andoni Eguíluz Morán
- * Facultad de Ingeniería - Universidad de Deusto
- */
 public class BaseDeDatos {
 
-	// ------------------------------------
-	// VALIDO PARA CUALQUIER BASE DE DATOS
-	// ------------------------------------
-	
 	private static Connection connection = null;
 	private static Statement statement = null;
 
@@ -93,7 +84,7 @@ public class BaseDeDatos {
 		try {
 			statement.executeUpdate("create table partida " +
 				"(fecha string, hora string)");
-			//Podemos añadirle hora tal vez...
+			
 			
 		} catch (SQLException e) {
 			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
@@ -141,7 +132,6 @@ public class BaseDeDatos {
 		
 		try {
 			 PreparedStatement pstmt = connection.prepareStatement(i);
-			// getConnection();
 			 pstmt.setString(1,fecha);
 			 pstmt.setString(2, hora);
 			 pstmt.executeUpdate();
@@ -159,7 +149,6 @@ public class BaseDeDatos {
 		
 		try {
 			 PreparedStatement pstmt = connection.prepareStatement(i);
-			// getConnection();
 			 pstmt.setString(1,nickname);
 			 pstmt.setString(2, nom);
 			 pstmt.setString(3, ape);
@@ -191,7 +180,7 @@ public class BaseDeDatos {
 		}
 	}
 	
-	public static void selectJuega(TablaEstad p,String consulta)
+	public static void select(TablaEstad p,String consulta)
 	{
 		initBD("pong game");
 		

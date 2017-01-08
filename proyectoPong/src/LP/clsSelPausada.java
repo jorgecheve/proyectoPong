@@ -44,12 +44,28 @@ public class clsSelPausada extends JFrame implements ListSelectionListener{
 		Componentes();
 		
 		jListaPartidas.addListSelectionListener(this);
-		for(int i=0;i<lista.size();i++)
+		/*for(int i=0;i<lista.size();i++)
 		{
 			modelo1.addElement(lista.get(i));
-		}
+		}*/
+		modelo1=rellenarModelo(modelo1);
 		setVisible(true);
 		
+	}
+	
+	
+	public JList<clsPausa> getjListaPartidas() {
+		return jListaPartidas;
+	}
+
+
+	public DefaultListModel<clsPausa>rellenarModelo(DefaultListModel<clsPausa> m)
+	{
+		for(int i=0;i<lista.size();i++)
+		{
+			m.addElement(lista.get(i));
+		}
+		return m;
 	}
 	
 	public void Componentes()
