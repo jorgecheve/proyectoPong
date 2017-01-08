@@ -1,10 +1,14 @@
 package LN;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
+
 import javax.swing.JOptionPane;
+
+import org.sqlite.SQLiteException;
 
 import LD.BaseDeDatos;
 import LD.clsConstantes.enficdatos;
@@ -158,23 +162,37 @@ public class clsGestor
 		}
 	}
 	
-	public static void enfrentamientos()
+	public static void enfrentamientos() throws SQLException
 	{
 		TablaEstad t=new TablaEstad();
-		//BaseDeDatos.select(t,"SELECT DISTINCT nickname from juega where goles=10;"); //LISTADO DE TODOS LOS USUARIOS QUE HAN SIDO CAMPEONES
-		//BaseDeDatos.select(t,"SELECT NOMBRE, APELLIDO, NICKNAME FROM JUGADOR;"); 	//LISTADO DE TODOS LOS JUGADORES
 		BaseDeDatos.select(t, "select a.nickname,a.goles, b.nickname, b.goles, a.fechahora from juega a, juega b "
 				+ "where a.fechahora=b.fechahora and a.nickname<> b.nickname and a.papel='local' and b.papel='visitante';"); //TODOS LOS ENFRENTAMIENTOS Y SUS RESULTADOS
-		//BaseDeDatos.select(t, "select distinct j.nombre, j.apellido, j.nickname from jugador j, juega jg where j.nickname=jg.nickname and jg.goles=10 ;"); //Los diferentes campeones que ha habido
 		
 		t.pack();
-		t.setVisible(true);		
+		t.setVisible(true);
+		
 	}
-	public static void campeones()
+	public static void campeones() throws SQLException
 	{
 		TablaEstad t=new TablaEstad();	
 		BaseDeDatos.select(t, "select distinct j.nombre, j.apellido, j.nickname from jugador j, juega jg where j.nickname=jg.nickname and jg.goles=10 ;"); //Los diferentes campeones que ha habido
 		
+		t.pack();
+		t.setVisible(true);	
+	}
+	
+	public static void partGan() throws SQLException
+	{
+		TablaEstad t=new TablaEstad();	
+		BaseDeDatos.select(t, "select nickname, count(*) from juega where goles=10 group by nickname;");  //Numero de victorias por cada jugador			
+		t.pack();
+		t.setVisible(true);	
+	}
+	
+	public static void goles() throws SQLException //goles marcados por cada jugador
+	{
+		TablaEstad t=new TablaEstad();	
+		BaseDeDatos.select(t, "select j.nombre,j.apellido,ju.nickname, sum(ju.goles) from juega ju, jugador j where j.nickname=ju.nickname group by ju.nickname;");	
 		t.pack();
 		t.setVisible(true);	
 	}

@@ -1,8 +1,10 @@
 package LP;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -14,10 +16,17 @@ import javax.swing.JOptionPane;
 
 
 
+
+
+
+import org.sqlite.SQLiteException;
+
 import Game.VentJuego;
 import LP.clsInstrucciones;
 import LN.clsGestor;
 import LN.noFicheroException;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 
 public class menuPr extends JFrame {
@@ -52,7 +61,20 @@ public class menuPr extends JFrame {
 	public menuPr() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(700,500);		
-		setLayout(null);
+		getContentPane().setLayout(null);
+		getContentPane().setBackground(Color.BLACK);
+		
+		JLabel lblPongGame = new JLabel("PONG GAME");
+		lblPongGame.setFont(new Font("Cooper Black", Font.PLAIN, 44));
+		lblPongGame.setForeground(Color.WHITE);
+		lblPongGame.setBounds(189, 107, 317, 139);
+		getContentPane().add(lblPongGame);
+		
+		JLabel lblRealizadoPorIgnacio = new JLabel("Realizado por:  Ignacio garbizu, Mikel Aguiriano & Jorge Echeverr\u00EDa.");
+		lblRealizadoPorIgnacio.setFont(new Font("Cooper Black", Font.PLAIN, 13));
+		lblRealizadoPorIgnacio.setForeground(Color.WHITE);
+		lblRealizadoPorIgnacio.setBounds(203, 400, 471, 30);
+		getContentPane().add(lblRealizadoPorIgnacio);
 		
 		
 		JMenuBar menuBar=new JMenuBar();
@@ -92,6 +114,19 @@ public class menuPr extends JFrame {
 			}
 		});
 		
+		JMenuItem config=new JMenuItem("Configuración");
+		juego.add(config);
+		config.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{ 
+				
+				clsConfi c=new clsConfi();
+				c.setVisible(true);
+				
+			}
+		});
+		
 		JMenu alta=new JMenu("Usuario");
 		menuBar.add(alta);
 		
@@ -116,7 +151,13 @@ public class menuPr extends JFrame {
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{ 
-				clsGestor.enfrentamientos();
+				try {
+					clsGestor.enfrentamientos();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					//e.printStackTrace();
+					JOptionPane.showMessageDialog(null, "No hay estadísticas");
+				}			
 			}
 		});
 		
@@ -126,9 +167,48 @@ public class menuPr extends JFrame {
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{ 
-				clsGestor.campeones();
+				try {
+					clsGestor.campeones();
+				} catch ( SQLException e) {
+					// TODO Auto-generated catch block
+					//e.printStackTrace();
+					JOptionPane.showMessageDialog(null, "No hay estadísticas");
+				}
 			}
 		});
+		
+		JMenuItem estad3=new JMenuItem ("Partidas ganadas por cada jugador");
+		estadi.add(estad3);
+		estad3.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{ 
+				try {
+					clsGestor.partGan();
+				} catch ( SQLException e) {
+					// TODO Auto-generated catch block
+					//e.printStackTrace();
+					JOptionPane.showMessageDialog(null, "No hay estadísticas");
+				}
+			}
+		});
+		
+		JMenuItem estad4=new JMenuItem ("Goles marcados por cada jugador");
+		estadi.add(estad4);
+		estad4.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{ 
+				try {
+					clsGestor.goles();
+				} catch ( SQLException e) {
+					// TODO Auto-generated catch block
+					//e.printStackTrace();
+					JOptionPane.showMessageDialog(null, "No hay estadísticas");
+				}
+			}
+		});
+		
 		
 		JMenu inst=new JMenu("Instrucciones");
 		menuBar.add(inst);
@@ -144,5 +224,4 @@ public class menuPr extends JFrame {
 		});
 	
 	}
-
 }

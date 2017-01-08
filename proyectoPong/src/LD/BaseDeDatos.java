@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import org.sqlite.SQLiteException;
+
 import LP.TablaEstad;
 
 public class BaseDeDatos {
@@ -180,14 +182,14 @@ public class BaseDeDatos {
 		}
 	}
 	
-	public static void select(TablaEstad p,String consulta)
+	public static void select(TablaEstad p,String consulta) throws SQLException
 	{
 		initBD("pong game");
 		
 		if(statement==null) return;
 		
 		String s=consulta;
-		try {
+			
 			ResultSet rs=statement.executeQuery(s);
 			
 			int col=rs.getMetaData().getColumnCount();
@@ -212,11 +214,7 @@ public class BaseDeDatos {
 
 			   p.addFila(fila); 
 			}
-			
-			} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			}
+					
 		close();
 				
 	}

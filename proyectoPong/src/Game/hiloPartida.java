@@ -4,7 +4,7 @@ package Game;
 public class hiloPartida extends Thread
 {
 	private panelJuego partida=new panelJuego(null,null,null);
-	
+	public static int dormir=3;
 	
 	public hiloPartida(panelJuego p)
 	{
@@ -19,7 +19,7 @@ public class hiloPartida extends Thread
 		 {
 			 
 	            try {
-	                Thread.sleep(3);
+	                Thread.sleep(dormir);
 	             
 	            } catch (InterruptedException ex) {
 	              
